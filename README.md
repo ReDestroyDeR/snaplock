@@ -1,0 +1,38 @@
+# V(ersioned) Lock
+*MVCC without transactions or something*
+
+Synchronous ReadWrite lock for Rust leveraging data versioning.
+
+Example:
+
+```rust
+use vlock::VLock;
+
+fn main() {
+    let lock = VLock::new(String::from("Hello"));
+    
+    // Multiple readers can access the data concurrently
+    let reader1 = lock.read();
+    let reader2 = lock.read();
+    assert_eq!(*reader1, "Hello");
+    assert_eq!(*reader2, "Hello");
+    
+    // Writers have exclusive access
+    {
+        let mut writer = lock.write();
+        writer.push_str(", World!");
+        
+        // During write readers see old values
+        let reader = lock.read();
+        assert_eq!(*reader, "Hello");
+    }
+    
+    // When write is finished, new readers see the updated value
+    let reader3 = lock.read();
+    assert_eq!(*reader3, "Hello, World!");
+    
+    // Old readers still see their old value
+    assert_eq!(*reader1, "Hello");
+    assert_eq!(*reader2, "Hello");
+}
+```
