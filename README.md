@@ -1,5 +1,9 @@
 # V(ersioned) Lock
+
 *MVCC without transactions or something*
+
+> [!WARNING]
+> This library is not production ready
 
 Synchronous ReadWrite lock for Rust leveraging data versioning.
 
@@ -36,3 +40,6 @@ fn main() {
     assert_eq!(*reader2, "Hello");
 }
 ```
+
+### Alternatives:
+- [`crossbeam::sync::SharedLock`](https://docs.rs/crossbeam/latest/crossbeam/sync/struct.ShardedLock.html) - A sharded reader-writer lock.

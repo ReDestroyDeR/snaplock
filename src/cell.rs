@@ -15,7 +15,6 @@ impl<T> CloneCell<T> {
 }
 
 impl<T: Clone> CloneCell<T> {
-
     pub fn get(&self) -> T {
         self.inner.borrow().clone()
     }

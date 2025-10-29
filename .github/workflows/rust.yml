@@ -28,8 +28,10 @@ jobs:
           lookup-only: "false"
           cache-provider: "github"
           cache-bin: "false"
+      - name: Check format
+        run: cargo fmt --all --check
       - name: Run tests
-        uses: actions-rs/tarpaulin@v0.1.0
+        run: cargo test --verbose
       
 
   publish:

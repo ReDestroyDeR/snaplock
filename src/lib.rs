@@ -1,9 +1,9 @@
 mod cell;
 
-use std::ops::{Deref, DerefMut};
-use std::sync::{Arc, RwLockWriteGuard, RwLock};
-use std::sync::atomic::{AtomicUsize, Ordering};
 use crate::cell::CloneCell;
+use std::ops::{Deref, DerefMut};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, RwLock, RwLockWriteGuard};
 
 /// A versioned lock implementation inspired by Multi-Version Concurrency Control (MVCC).
 ///
@@ -262,6 +262,9 @@ mod tests {
 
         drop(writer);
 
-        assert_eq!(*reader, "Hello", "Should read old data after the drop of write lock");
+        assert_eq!(
+            *reader, "Hello",
+            "Should read old data after the drop of write lock"
+        );
     }
 }
