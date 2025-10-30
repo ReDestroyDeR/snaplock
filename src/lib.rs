@@ -54,7 +54,7 @@ pub use crate::async_lock_impl::*;
 /// assert_eq!(*reader2, "Hello");
 /// assert_eq!(*reader3, "Hello");
 /// ```
-pub struct SnapshotLock<T, Inner> {
+pub struct SnapshotLock<T, Inner = std::sync::RwLock<(T, usize)>> {
     inner: Inner,
     latest: ArcSwap<T>,
     latest_version: AtomicUsize,
