@@ -41,5 +41,9 @@ fn main() {
 }
 ```
 
+### MSRV Policy:
+
+There is none. Current Minimum Supported Rust Version is 1.85.0
+
 ### Alternatives:
 - [`crossbeam::sync::SharedLock`](https://docs.rs/crossbeam/latest/crossbeam/sync/struct.ShardedLock.html) - A sharded reader-writer lock.
