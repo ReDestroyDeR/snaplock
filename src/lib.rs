@@ -1,7 +1,7 @@
+use arc_swap::ArcSwap;
 use std::ops::{Deref, DerefMut};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, RwLock, RwLockWriteGuard};
-use arc_swap::ArcSwap;
 
 /// A versioned lock implementation inspired by Multi-Version Concurrency Control (MVCC).
 ///
