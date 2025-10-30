@@ -50,3 +50,4 @@ There is none. Current Minimum Supported Rust Version is 1.85.0
 ### Alternatives:
 - [`crossbeam::sync::SharedLock`](https://docs.rs/crossbeam/latest/crossbeam/sync/struct.ShardedLock.html) - A sharded reader-writer lock.
 - [vlock](https://crates.io/crates/vlock) - A fast and scalable multi-version shared state lock with wait-free read access.
+- [parking_lot](https://crates.io/crates/parking_lot) - More compact and efficient implementations of the standard synchronization primitives.
