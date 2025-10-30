@@ -7,7 +7,7 @@ rust-version = "1.85.0"
 
 
 authors = ["Daniil Shreyder <daniil.schroder@gmail.com>"]
-description = "RwLock with wait-free Reads and sequential Writes"
+description = "RwLock with lock-free Reads and sequential Writes"
 repository = "https://github.com/ReDestroyDeR/snaplock"
 license = "MIT"
 license-file = "LICENSE"
