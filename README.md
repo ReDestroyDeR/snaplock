@@ -10,7 +10,7 @@
 ReadWrite lock for Rust leveraging data versioning.
 
 Features:
-- async : 
+- `async` : Adds `new_async` constructor. `.write()` method becomes `async`
 
 Example:
 

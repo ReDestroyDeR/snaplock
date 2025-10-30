@@ -51,7 +51,7 @@ impl<T: Clone> SnapshotLock<T, RwLock<(T, usize)>> {
     /// } // Guard dropped here, version incremented
     /// assert_eq!(*lock.read(), 42);
     /// ```
-    pub fn write<'a>(&'a self) -> SnapshotLockWriteGuard<'a, T, RwLockWriteGuard<(T, usize)>> {
+    pub fn write(&self) -> SnapshotLockWriteGuard<'_, T, RwLockWriteGuard<'_, (T, usize)>> {
         let mut guard = self.inner.write().unwrap();
         guard.1 += 1; // increment version
         SnapshotLockWriteGuard(guard, PhantomData)
