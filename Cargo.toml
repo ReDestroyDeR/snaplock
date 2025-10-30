@@ -1,6 +1,6 @@
 [package]
 name = "snaplock"
-version = "0.0.1"
+version = "0.0.2"
 resolver = "3"
 edition = "2024"
 rust-version = "1.85.0"
@@ -16,3 +16,4 @@ readme = "README.md"
 
 
 [dependencies]
+arc-swap = "1.7.1"

@@ -1,9 +1,7 @@
-mod cell;
-
-use crate::cell::CloneCell;
 use std::ops::{Deref, DerefMut};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::{Arc, RwLock, RwLockWriteGuard};
+use arc_swap::ArcSwap;
 
 /// A versioned lock implementation inspired by Multi-Version Concurrency Control (MVCC).
 ///
@@ -48,13 +46,9 @@ use std::sync::{Arc, RwLock, RwLockWriteGuard};
 /// ```
 pub struct SnapshotLock<T> {
     inner: RwLock<(T, usize)>,
-    latest: CloneCell<Arc<T>>,
+    latest: ArcSwap<T>,
     latest_version: AtomicUsize,
 }
-
-// todo: prove. set up miri
-unsafe impl<T: Send> Send for SnapshotLock<T> {}
-unsafe impl<T: Send> Sync for SnapshotLock<T> {}
 
 impl<T: Clone> SnapshotLock<T> {
     /// Creates a new `SnapshotLock` with the initial value.
@@ -74,7 +68,7 @@ impl<T: Clone> SnapshotLock<T> {
     pub fn new(inner: T) -> Self {
         Self {
             inner: RwLock::new((inner.clone(), 0)),
-            latest: CloneCell::new(Arc::new(inner)),
+            latest: ArcSwap::new(Arc::new(inner)),
             latest_version: AtomicUsize::new(0),
         }
     }
@@ -132,11 +126,11 @@ impl<T: Clone> SnapshotLock<T> {
         if let Ok(read) = self.inner.try_read() {
             let (data, version) = read.deref();
             if self.latest_version.swap(*version, Ordering::Acquire) < *version {
-                self.latest.set(Arc::new(data.clone()));
+                self.latest.store(Arc::new(data.clone()));
             }
         }
 
-        SnapshotLockReadGuard(self.latest.get())
+        SnapshotLockReadGuard(arc_swap::Guard::into_inner(self.latest.load()))
     }
 }
 
