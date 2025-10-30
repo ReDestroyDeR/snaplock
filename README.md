@@ -1,4 +1,6 @@
-# Snapshot Lock | snaplock
+# Snapshot Lock | [snaplock](https://crates.io/crates/snaplock)
+
+[crates.io](https://crates.io/crates/snaplock)
 
 *MVCC without transactions or something*
 
