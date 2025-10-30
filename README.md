@@ -1,4 +1,4 @@
-# V(ersioned) Lock
+# Snapshot Lock | snaplock
 
 *MVCC without transactions or something*
 
@@ -10,10 +10,10 @@ Synchronous ReadWrite lock for Rust leveraging data versioning.
 Example:
 
 ```rust
-use vlock::VLock;
+use snaplock::SnapshotLock;
 
 fn main() {
-    let lock = VLock::new(String::from("Hello"));
+    let lock = SnapshotLock::new(String::from("Hello"));
     
     // Multiple readers can access the data concurrently
     let reader1 = lock.read();
@@ -47,3 +47,4 @@ There is none. Current Minimum Supported Rust Version is 1.85.0
 
 ### Alternatives:
 - [`crossbeam::sync::SharedLock`](https://docs.rs/crossbeam/latest/crossbeam/sync/struct.ShardedLock.html) - A sharded reader-writer lock.
+- [vlock](https://crates.io/crates/vlock) - A fast and scalable multi-version shared state lock with wait-free read access.

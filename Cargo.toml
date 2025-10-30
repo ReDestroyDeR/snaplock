@@ -1,5 +1,5 @@
 [package]
-name = "vlock"
+name = "snaplock"
 version = "0.0.1"
 resolver = "3"
 edition = "2024"
@@ -7,11 +7,11 @@ rust-version = "1.85.0"
 
 
 authors = ["Daniil Shreyder <daniil.schroder@gmail.com>"]
-description = "Versioned RwLock without Reader contention"
-repository = "https://github.com/ReDestroyDeR/vlock"
+description = "RwLock with wait-free Reads and sequential Writes"
+repository = "https://github.com/ReDestroyDeR/snaplock"
 license = "MIT"
 license-file = "LICENSE"
-keywords = ["lock", "sync", "rwlock", "concurrency"]
+keywords = ["sync", "rwlock", "concurrency", "wait-free"]
 readme = "README.md"
 
 
