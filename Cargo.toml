@@ -1,19 +1,27 @@
 [package]
 name = "snaplock"
-version = "0.0.2"
+version = "0.0.3"
 resolver = "3"
 edition = "2024"
 rust-version = "1.85.0"
 
-
 authors = ["Daniil Shreyder <daniil.schroder@gmail.com>"]
 description = "RwLock with lock-free Reads and sequential Writes"
 repository = "https://github.com/ReDestroyDeR/snaplock"
+documentation = "https://docs.rs/snaplock/latest/snaplock/"
 license = "MIT"
 license-file = "LICENSE"
 keywords = ["sync", "rwlock", "concurrency", "wait-free"]
 readme = "README.md"
 
+[features]
+async = ["dep:async-lock"]
+
 
 [dependencies]
 arc-swap = "1.7.1"
+
+async-lock = { version = "3.4.1", optional = true }
+
+[dev-dependencies]
+tokio = { version = "1.48.0", features = ["rt-multi-thread"] }

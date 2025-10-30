@@ -7,7 +7,10 @@
 > [!WARNING]
 > This library is not production ready
 
-Synchronous ReadWrite lock for Rust leveraging data versioning.
+ReadWrite lock for Rust leveraging data versioning.
+
+Features:
+- async : 
 
 Example:
 
